@@ -3,6 +3,9 @@
     hosts: local
     connection: local
 
+    vars:
+      ansible_python_interpreter: /Library/Frameworks/Python.framework/Versions/3.8/bin/python3
+
     tasks:
       - name: Create new bucket
         aws_s3:
