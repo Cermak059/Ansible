@@ -1,0 +1,17 @@
+---
+  - name: Test s3
+    hosts: local
+    connection: local
+
+    vars:
+      ansible_python_interpreter: /Library/Frameworks/Python.framework/Versions/3.8/bin/python3
+
+    tasks:
+      - name: Upload files to new paloslanestestbucket23
+        s3_sync:
+          bucket: paloslanestestbucket23
+          file_root: /Users/kylecermak/Documents/GitHub/PalosLanesV2
+          file_change_strategy: date_size
+          permission: public-read
+          include: "*"
+          exclude: "*.git"
