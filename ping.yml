@@ -2,7 +2,16 @@
   - hosts: AWS
     gather_facts: False
     remote_user: ec2-user
+    become: True
+
+    vars:
+      ansible_python_interpreter: /usr/bin/python3
 
     tasks:
-      - name: ping
-        ping:
+      - name: GET object from S3 bucket
+        aws_s3:
+          bucket: paloslanestestbucket23
+          object: Skyrim/app.py
+          dest: /var/PalosLanesV2/app.py
+          mode: get
+          overwrite: always
