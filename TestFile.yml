@@ -1,0 +1,17 @@
+---
+  - hosts: AWS
+    gather_facts: False
+    remote_user: ec2-user
+    become: True
+
+    vars:
+      ansible_python_interpreter: /usr/bin/python3
+
+    tasks:
+      - name: List files from s3
+        aws_s3:
+          mode: get
+          bucket: paloslanestestbucket23
+          object: "Skyrim/app.py"
+          dest: /var/PalosLanesV2/app.py
+          overwrite: always

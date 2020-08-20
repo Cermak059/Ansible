@@ -8,10 +8,18 @@
       ansible_python_interpreter: /usr/bin/python3
 
     tasks:
-      - name: GET object from S3 bucket
+      - name: List files from s3
         aws_s3:
+          mode: list
           bucket: paloslanestestbucket23
-          object: Skyrim/app.py
-          dest: /var/PalosLanesV2/app.py
+          object: "Skyrim/"
+          marker: "Skyrim/"
+        register: s3BucketItems
+
+      - name: Copy files to ec2
+        aws_s3:
           mode: get
-          overwrite: always
+          bucket: paloslanestestbucket23
+          object: "{{ item }}"
+          dest: "var/PalosLanesV2/{{ item|basename }}"
+        with_items: "{{ s3BucketItems.s3_keys }}"
