@@ -7,11 +7,11 @@
       ansible_python_interpreter: /Library/Frameworks/Python.framework/Versions/3.8/bin/python3
 
     tasks:
-      - name: Upload files to new paloslanestestbucket23
+      - name: Upload files to chicagolandbowlingservice
         s3_sync:
-          bucket: paloslanestestbucket23
+          bucket: chicagolandbowlingservice.com-bootstrap
           file_root: /Users/kylecermak/Documents/GitHub/PalosLanesV2
           file_change_strategy: date_size
           permission: public-read
           include: "*"
-          exclude: "*.git"
+          exclude: "*.git,.DS_Store"
