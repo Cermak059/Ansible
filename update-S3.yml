@@ -9,9 +9,9 @@
     tasks:
       - name: Upload files to chicagolandbowlingservice
         s3_sync:
-          bucket: chicagolandbowlingservice.com-bootstrap
-          file_root: /Users/kylecermak/Documents/GitHub/PalosLanesV2
-          file_change_strategy: date_size
-          permission: public-read
-          include: "*"
-          exclude: "*.git,.DS_Store"
+            bucket: chicagolandbowlingservice.com-bootstrap
+            file_root: /Users/kylecermak/Documents/GitHub/PalosLanesV2
+            file_change_strategy: date_size
+            permission: public-read
+            include: "*"
+            exclude: "*.git,.DS_Store"
