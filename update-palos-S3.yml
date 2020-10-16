@@ -1,0 +1,17 @@
+---
+  - name: Test s3
+    hosts: local
+    connection: local
+
+    vars:
+      ansible_python_interpreter: /Library/Frameworks/Python.framework/Versions/3.8/bin/python3
+
+    tasks:
+      - name: Upload files to chicagolandbowlingservice
+        s3_sync:
+            bucket: paloslaneswebsite
+            file_root: /Users/kylecermak/Documents/GitHub/Palos_Website
+            file_change_strategy: date_size
+            permission: public-read
+            include: "*"
+            exclude: "*.git,.DS_Store"

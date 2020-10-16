@@ -9,6 +9,6 @@
     tasks:
       - name: Create new bucket
         aws_s3:
-          bucket: paloslanestestbucket23
+          bucket: paloslaneswebsite
           mode: create
           region: us-east-2

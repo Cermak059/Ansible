@@ -1,0 +1,25 @@
+---
+  - hosts: AWS_Stage
+    remote_user: ec2-user
+    become: True
+
+    vars:
+      ansible_python_interpreter: /usr/bin/python3
+
+    tasks:
+        - name: List html files from s3
+          aws_s3:
+            mode: list
+            bucket: paloslaneswebsite
+            object: "html/"
+            marker: "html/"
+          register: s3BucketHTMLItems
+          
+        - name: Copy html files to ec2
+          aws_s3:
+            mode: get
+            bucket: paloslaneswebsite
+            object: "{{ item }}"
+            dest: /var/www/html/{{ item|basename }}
+            overwrite: always
+          with_items: "{{ s3BucketHTMLItems.s3_keys }}"
